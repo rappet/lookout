@@ -30,7 +30,7 @@
                 <input type="text" class="form-control" name="target" id="target" value="{{ params.target }}" placeholder="x.x.x.x/x, xxxx:xxxx::xxxx/xx, example.com">
             </div>
             <div class="form-check mb-3">
-                <input class="form-check-input" type="checkbox" value="true" name="rawoutput" id="rawOutput" {% if params.rawoutput %}checked{% endif %}>
+                <input class="form-check-input" type="checkbox" value="true" name="rawoutput" id="rawOutput" {% if params.rawoutput %}checked{% endif %} disabled>
                 <label class="form-check-label" for="rawOutput">
                     Raw output (no tables)
                 </label>
