@@ -1,0 +1,32 @@
+{% block defines %}{% endblock defines -%}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/all.css">
+    <link rel="stylesheet" href="css/lookout.css">
+    <title>Hello, world!</title>
+</head>
+
+<body class="">
+    {% include "components/headnav.html" %}
+
+    <main class="p-3 container-flex mb-md-4" role="main">
+        {% block content %}
+        {% endblock content %}
+    </main>
+
+    {% include "components/footer.html" %}
+
+    <!--<script src="js/jquery-3.4.1.slim.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>-->
+</body>
+
+</html>

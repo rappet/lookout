@@ -1,0 +1,12 @@
+html,
+body {
+    height: 100%;
+}
+
+main {
+    min-height: 60%;
+}
+
+footer {
+    min-height: 300px;
+}

@@ -1,0 +1,85 @@
+{% extends "components/lgmain.html" %}
+{% block output %}
+<h3 class="mb-3">Output</h3>
+<div class="overflow-auto mx-n3 mx-md-0">
+    <table class="table table-sm">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col" colspan="5">traceroute chizue.rappet.de</th>
+            </tr>
+        </thead>
+        <thead class="thead-light">
+            <tr>
+                <th scope="row" colspan="2">to</th>
+                <td colspan="3"><b>rappet.de</b> (185.207.106.251)</td>
+            </tr>
+            <tr>
+                <th scope="row" colspan="2">hops max</th>
+                <td colspan="3">30</td>
+            </tr>
+            <tr>
+                <th scope="row" colspan="2">packet size</th>
+                <td colspan="3">60 byte</td>
+            </tr>
+            <tr>
+                <th scope="col">Hop</th>
+                <th scope="col">Packet 1</th>
+                <th scope="col">Packet 2</th>
+                <th scope="col">Packet 3</th>
+                <th scope="col">Hostname</th>
+            </tr>
+        </thead>
+        <tbody class="thead-light">
+            <tr>
+                <th scope="row">1</th>
+                <td>3.908 ms</td>
+                <td>3.986 ms</td>
+                <td>3.943 ms</td>
+                <td><b>100.64.0.1</b> (100.64.0.1))</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>6.448 ms</td>
+                <td>6.835 ms</td>
+                <td>6.867 ms</td>
+                <td><b>100.127.1.6</b> (100.127.1.6)</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>6.590 ms</td>
+                <td>6.590 ms</td>
+                <td>6.590 ms</td>
+                <td><b>100.127.1.7</b> (100.127.1.7)</td>
+            </tr>
+            <tr>
+                <th scope="row">4</th>
+                <td>6.590 ms</td>
+                <td>6.590 ms</td>
+                <td>6.590 ms</td>
+                <td><b>100.127.1.11</b> (100.127.1.11)</td>
+            </tr>
+            <tr>
+                <th scope="row">5</th>
+                <td>6.590 ms</td>
+                <td>6.590 ms</td>
+                <td>6.590 ms</td>
+                <td><b>185.22.45.30</b> (185.22.45.30)</td>
+            </tr>
+            <tr>
+                <th scope="row">6</th>
+                <td>9.783 ms</td>
+                <td>9.783 ms</td>
+                <td>9.783 ms</td>
+                <td><b>gw-decix.ffm.netcup.net</b> (80.81.193.182)</td>
+            </tr>
+            <tr>
+                <th scope="row">7</th>
+                <td>9.985 ms</td>
+                <td>9.985 ms</td>
+                <td>9.985 ms</td>
+                <td><b>chizue.rappet.de</b> (185.207.106.251)</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock output %}
