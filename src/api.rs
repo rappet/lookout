@@ -34,7 +34,7 @@ impl Params {
                 Ok(Some(String::from_utf8(output)?))
             },
             (Some(Target::Ip(ip)), Command::Mtr) => {
-                let output = process::Command::new("mtr").args(&["-we", &ip.to_string()]).output()?.stdout;
+                let output = process::Command::new("mtr").args(&["-wenc3", &ip.to_string()]).output()?.stdout;
                 Ok(Some(String::from_utf8(output)?))
             },
             _ => Ok(None)
