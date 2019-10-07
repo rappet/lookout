@@ -2,6 +2,7 @@ use actix_web::{HttpResponse, ResponseError};
 use derive_more::Display;
 use std::string::FromUtf8Error;
 use std::num::ParseIntError;
+use std::net::AddrParseError;
 
 #[derive(Debug, Display)]
 pub enum LookoutError {
@@ -13,6 +14,10 @@ pub enum LookoutError {
     Utf8(Box<FromUtf8Error>),
     #[display(fmt = "ParseInt Error")]
     ParseInt(Box<ParseIntError>),
+    #[display(fmt = "AddrParse Error")]
+    AddrParse(Box<AddrParseError>),
+    #[display(fmt = "Other Error")]
+    Str(&'static str),
 }
 
 impl ResponseError for LookoutError {
@@ -34,6 +39,14 @@ impl ResponseError for LookoutError {
                 error!("{:?}", err);
                 HttpResponse::InternalServerError().finish()
             },
+            LookoutError::AddrParse(err) => {
+                error!("{:?}", err);
+                HttpResponse::InternalServerError().finish()
+            },
+            LookoutError::Str(s) => {
+                error!("{}", s);
+                HttpResponse::InternalServerError().finish()
+            },
         }
     }
 }
@@ -44,6 +57,7 @@ impl std::error::Error for LookoutError {
             LookoutError::Io(err) => Some(err),
             LookoutError::Utf8(err) => Some(err),
             LookoutError::ParseInt(err) => Some(err),
+            LookoutError::AddrParse(err) => Some(err),
             _ => None
         }
     }
@@ -70,6 +84,18 @@ impl From<FromUtf8Error> for LookoutError {
 impl From<ParseIntError> for LookoutError {
     fn from(err: ParseIntError) -> LookoutError {
         LookoutError::ParseInt(Box::new(err))
+    }
+}
+
+impl From<AddrParseError> for LookoutError {
+    fn from(err: AddrParseError) -> LookoutError {
+        LookoutError::AddrParse(Box::new(err))
+    }
+}
+
+impl From<&'static str> for LookoutError {
+    fn from(err: &'static str) -> LookoutError {
+        LookoutError::Str(err)
     }
 }
 

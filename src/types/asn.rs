@@ -3,7 +3,7 @@ use std::str::FromStr;
 use crate::error::{LookoutError, Result};
 
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
-pub struct ASn(u16);
+pub struct ASn(pub u16);
 
 impl FromStr for ASn {
     type Err = LookoutError;
@@ -17,12 +17,18 @@ impl FromStr for ASn {
     }
 }
 
+impl From<u16> for ASn {
+    fn from(asn: u16) -> ASn {
+        ASn(asn)
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
 
     #[test]
-    fn test_asn() {
+    fn test_parse_asn() {
         assert_eq!("123".parse::<ASn>().unwrap(), ASn(123));
         assert_eq!("AS123".parse::<ASn>().unwrap(), ASn(123));
         assert_eq!("as123".parse::<ASn>().unwrap(), ASn(123));
