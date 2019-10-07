@@ -52,7 +52,7 @@ impl FromStr for Host {
             ip[1..ip.len()-1].parse()?
         };
         let asn: Option<ASn> = if let Some(asn) = split.next() {
-            if (asn == "[*]") {
+            if asn == "[*]" {
                 // ASN could not be resolved
                 None
             } else if asn.len()==0 || asn.chars().next() != Some('[') || asn.chars().last() != Some(']') {
