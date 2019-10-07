@@ -27,7 +27,7 @@
             <h3 class="mb-3">Arguments</h3>
             <div class="form-group mb-3">
                 <label for="target">IP/Hostname</label>
-                <input type="text" class="form-control" name="target" id="target" value="{{ params.target }}" placeholder="x.x.x.x/x, xxxx:xxxx::xxxx/xx, example.com">
+                <input type="text" class="form-control" name="target" id="target" value="{{ params.target }}" placeholder="x.x.x.x, xxxx:xxxx::xxxx, example.com" required>
             </div>
             <div class="form-check mb-3">
                 <input class="form-check-input" type="checkbox" value="true" name="rawoutput" id="rawOutput" {% if params.rawoutput %}checked{% endif %} disabled>
