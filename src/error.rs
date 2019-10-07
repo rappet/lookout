@@ -1,6 +1,7 @@
 use actix_web::{HttpResponse, ResponseError};
 use derive_more::Display;
 use std::string::FromUtf8Error;
+use std::num::ParseIntError;
 
 #[derive(Debug, Display)]
 pub enum LookoutError {
@@ -10,6 +11,8 @@ pub enum LookoutError {
     Tera(Box<tera::Error>),
     #[display(fmt = "UTF-8 Error")]
     Utf8(Box<FromUtf8Error>),
+    #[display(fmt = "ParseInt Error")]
+    ParseInt(Box<ParseIntError>),
 }
 
 impl ResponseError for LookoutError {
@@ -27,6 +30,10 @@ impl ResponseError for LookoutError {
                 error!("{:?}", err);
                 HttpResponse::InternalServerError().finish()
             },
+            LookoutError::ParseInt(err) => {
+                error!("{:?}", err);
+                HttpResponse::InternalServerError().finish()
+            },
         }
     }
 }
@@ -36,6 +43,7 @@ impl std::error::Error for LookoutError {
         match self {
             LookoutError::Io(err) => Some(err),
             LookoutError::Utf8(err) => Some(err),
+            LookoutError::ParseInt(err) => Some(err),
             _ => None
         }
     }
@@ -56,6 +64,12 @@ impl From<tera::Error> for LookoutError {
 impl From<FromUtf8Error> for LookoutError {
     fn from(err: FromUtf8Error) -> LookoutError {
         LookoutError::Utf8(Box::new(err))
+    }
+}
+
+impl From<ParseIntError> for LookoutError {
+    fn from(err: ParseIntError) -> LookoutError {
+        LookoutError::ParseInt(Box::new(err))
     }
 }
 

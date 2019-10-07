@@ -16,6 +16,7 @@ use actix_web::{web, middleware, App, HttpServer};
 
 mod error;
 mod api;
+mod types;
 
 use error::{Result};
 
