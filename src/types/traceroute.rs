@@ -17,6 +17,32 @@ pub struct TracerouteHeader {
     pub packet_size: usize,
 }
 
+impl FromStr for TracerouteHeader {
+    type Err = LookoutError;
+
+    fn from_str(s: &str) -> Result<TracerouteHeader> {
+        let mut components = s.split(',');
+        let destination = components.next()
+            .ok_or("traceroute output: destination misssing")?
+            .trim_start_matches("traceroute to ")
+            .trim()
+            .parse()?;
+        let max_hops = components.next()
+            .ok_or("traceroute output: max hops misssing")?
+            .trim().split(' ')
+            .next().ok_or("traceroute output: max hops missing")?
+            .parse()?;
+        let packet_size = components.next()
+            .ok_or("traceroute output: packet size")?
+            .trim().split(' ')
+            .next().ok_or("traceroute output: max hops missing")?
+            .parse()?;
+        Ok(TracerouteHeader {
+            destination, max_hops, packet_size,
+        })
+    }
+}
+
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
 pub struct TracerouteHop {
     pub rtts: [Option<isize>; 3],
@@ -76,6 +102,18 @@ impl FromStr for Host {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn test_parse_header() {
+        assert_eq!(
+            "traceroute to one.one.one.one (1.1.1.1), 30 hops max, 60 byte packets".parse::<TracerouteHeader>().unwrap(),
+            TracerouteHeader {
+                destination: Host::new("one.one.one.one", "1.1.1.1".parse().unwrap(), None),
+                max_hops: 30,
+                packet_size: 60,
+            }
+        );
+    }
 
     #[test]
     fn test_parse_host() {
