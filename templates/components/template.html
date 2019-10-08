@@ -11,18 +11,22 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/all.css">
     <link rel="stylesheet" href="css/lookout.css">
-    <title>Hello, world!</title>
+    <title>Looking Glass</title>
 </head>
 
 <body class="">
     {% include "components/headnav.html" %}
 
-    <main class="p-3 container-flex mb-md-4" role="main">
+    <main class="px-3 container-flex" role="main">
         {% block content %}
         {% endblock content %}
     </main>
 
     {% include "components/footer.html" %}
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 
 </html>

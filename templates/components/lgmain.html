@@ -1,59 +1,40 @@
 {% extends "components/template.html" %} {% block content %}
 <div class="row">
-    <div class="col-lg-4 order-lg-2">
-        <form class="sticky-top" action="/" method="GET">
-            <h3 class="mb-3">Commands</h3>
-            <div class="my-3">
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="command" id="commandPing" value="ping"
-                        {% if params.command=="ping" %}checked{% endif %}>
-                    <label class="form-check-label" for="commandPing">
-                        <i class="fas fa-table-tennis"></i> ping
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="command" id="commandTraceroute"
-                        value="traceroute" {% if params.command=="traceroute" %}checked{% endif %}>
-                    <label class="form-check-label" for="commandTraceroute">
-                        <i class="fas fa-road"></i> traceroute
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="command" id="commandMtr" value="mtr"
-                        {% if params.command=="mtr" %}checked{% endif %}>
-                    <label class="form-check-label" for="commandMtr">
-                        <i class="fas fa-table"></i> mtr
-                    </label>
-                </div>
-            </div>
-
-            <h3 class="mb-3">Arguments</h3>
-
-            <div class="form-group mb-3">
-                <label for="target">IP/Hostname</label>
+    <div class="col-12">
+        <form action="/" method="GET">
+            <div class="input-group mb-1">
                 <input type="text" class="form-control" name="target" id="target" value="{{ params.target }}"
                     placeholder="x.x.x.x, xxxx:xxxx::xxxx, example.com" required>
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-outline-secondary">Probe</button>
+                </div>
             </div>
-            <div class="form-row">
-                <div class="col-6 col-lg-12">
-                    <div class="form-check mb-3">
-                        <input class="form-check-input" type="checkbox" value="true" name="rawoutput" id="rawOutput"
-                            {% if params.rawoutput %}checked{% endif %} disabled>
-                        <label class="form-check-label" for="rawOutput">
-                            <i class="fas fa-align-left"></i> Raw output (no tables)
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <input type="checkbox" aria-label="Raw output (no tables)" value="true" name="rawoutput"
+                            id="rawOutput" {% if params.rawoutput %}checked{% endif %}>
+                        <label class="form-check-label ml-2" for="rawOutput">
+                            <i class="fas fa-align-left"></i> Raw output<span class="d-none d-md-inline"> (no tables)</span> 
                         </label>
                     </div>
                 </div>
-                <div class="col-6 col-lg-12">
-                    <div class="mb-3">
-                        <button type="submit" class="btn btn-primary">Probe</button>
-                    </div>
-                </div>
+                <select class="custom-select" id="commandSelect" name="command">
+                    <option value="ping" {%- if params.command=="ping" %}selected{% endif %}>
+                        <i class="fas fa-table-tennis"></i> ping
+                    </option>
+                    <option value="traceroute" {%- if params.command=="traceroute" %}selected{% endif %}>
+                        <i class="fas fa-road"></i> traceroute
+                    </option>
+                    <option value="mtr" {%- if params.command=="mtr" %}selected{% endif %}>
+                        <i class="fas fa-table"></i> mtr
+                    </option>
+                </select>
             </div>
         </form>
     </div>
 
-    <div class="col-lg-8 order-lg-1">
+    <div class="col-12">
         {% block output %} {% endblock output %}
     </div>
 </div>
